@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Kavin Board | CodeAlpha Project Management Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h1 class="logo">📋 Kavin Board</h1>
+    <nav>
+      <a href="#" onclick="showPage('projects')">Projects</a>
+      <span id="authArea"></span>
+    </nav>
+  </header>
+
+  <main id="app">
+
+    <!-- PROJECTS LIST -->
+    <section id="projects" class="page">
+      <div id="newProjectBox" class="hidden card">
+        <input type="text" id="newProjectName" placeholder="Project name" />
+        <input type="text" id="newProjectDesc" placeholder="Description (optional)" />
+        <button onclick="createProject()">Create Project</button>
+      </div>
+      <h2>Your Projects</h2>
+      <div id="projectsList" class="grid"></div>
+    </section>
+
+    <!-- SINGLE PROJECT BOARD -->
+    <section id="board" class="page hidden">
+      <button onclick="showPage('projects')">&larr; Back to Projects</button>
+      <div id="boardHeader"></div>
+
+      <div class="new-task-box card">
+        <input type="text" id="newTaskTitle" placeholder="Task title" />
+        <input type="text" id="newTaskDesc" placeholder="Description" />
+        <select id="newTaskAssignee"></select>
+        <button onclick="createTask()">Add Task</button>
+      </div>
+
+      <div class="board-columns">
+        <div class="column" data-status="To Do">
+          <h3>To Do</h3>
+          <div class="taskList" id="col-todo"></div>
+        </div>
+        <div class="column" data-status="In Progress">
+          <h3>In Progress</h3>
+          <div class="taskList" id="col-inprogress"></div>
+        </div>
+        <div class="column" data-status="Done">
+          <h3>Done</h3>
+          <div class="taskList" id="col-done"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TASK DETAIL MODAL -->
+    <section id="taskModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeTaskModal()">✕</button>
+        <div id="taskModalContent"></div>
+      </div>
+    </section>
+
+    <!-- AUTH -->
+    <section id="auth" class="page hidden">
+      <div class="auth-box">
+        <div class="tabs">
+          <button id="tabLogin" class="tab active" onclick="switchAuthTab('login')">Login</button>
+          <button id="tabRegister" class="tab" onclick="switchAuthTab('register')">Register</button>
+        </div>
+        <form id="loginForm" onsubmit="return handleLogin(event)">
+          <input type="email" id="loginEmail" placeholder="Email" required />
+          <input type="password" id="loginPassword" placeholder="Password" required />
+          <button type="submit">Login</button>
+          <p class="error" id="loginError"></p>
+        </form>
+        <form id="registerForm" class="hidden" onsubmit="return handleRegister(event)">
+          <input type="text" id="regName" placeholder="Full Name" required />
+          <input type="email" id="regEmail" placeholder="Email" required />
+          <input type="password" id="regPassword" placeholder="Password" required />
+          <button type="submit">Create Account</button>
+          <p class="error" id="registerError"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer><p>Built by Kavin &mdash; CodeAlpha Full Stack Development Internship</p></footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
